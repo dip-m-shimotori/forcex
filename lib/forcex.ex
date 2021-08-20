@@ -36,7 +36,12 @@ defmodule Forcex do
   end
 
   def json_request(method, url, body, headers, options) do
-    raw_request(method, url, JSX.encode!(body), headers, options)
+    Logger.info("called improved json_request")
+    if body == ""
+      raw_request(method, url, body, headers, options)
+    else
+      raw_request(method, url, JSX.encode!(body), headers, options)
+    end
   end
 
   def raw_request(method, url, body, headers, options) do
